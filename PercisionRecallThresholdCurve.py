@@ -2,7 +2,7 @@ from utils import get_recall_threshold_curve, get_precision_threshold_curve
 import numpy as np
 
 
-class PrecisionRecallThresholdCurve():
+class PercisionRecallThresholdCurve():
 
     def __init__(self, num_bins=1000, betta=2):
         self.num_bins = num_bins

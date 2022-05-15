@@ -1,7 +1,7 @@
 import unittest
 from utils import *
 np.random.seed(0)
-from PrecisionRecallThresholdCurve import PrecisionRecallThresholdCurve as PRTC
+from PercisionRecallThresholdCurve import PercisionRecallThresholdCurve as PRTC
 
 
 class TestMethods(unittest.TestCase):
