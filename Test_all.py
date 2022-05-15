@@ -47,7 +47,7 @@ class TestMethods(unittest.TestCase):
         num_bins = 100
         predicted_probas = np.arange(0, 1 ,.01)
         labels = np.random.choice([0,1], num_bins)
-        target=.6
+        target=.7
         prtc = PRTC()
         threshold, result_fscore = prtc.get_threshold(predicted_probas,
                                                          labels, target=target,

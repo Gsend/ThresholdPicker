@@ -3,7 +3,7 @@ import pandas as pd
 
 def get_hist_cumsum(proba_array, num_bins):
     hist_, bins = np.histogram(proba_array, bins=num_bins)
-    return np.cumsum(hist_), bins[1:]
+    return np.cumsum(hist_)[:-1], bins[0:-1]
 
 
 def get_recall_threshold_curve(pos_proba_array, num_bins=100):

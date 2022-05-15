@@ -43,7 +43,8 @@ class PercisionRecallThresholdCurve():
         if mode == 'fscore':
             percisions, recalls, thresholds = self.get_curves(probas, labels)
             fscores = self.calc_fscore(percisions, recalls, betta)
-            min_index = np.argmin(fscores - target)
+            diffs = np.abs(fscores - target)
+            min_index = np.argmin(diffs)
             return thresholds[min_index], fscores[min_index]
 
     @staticmethod
