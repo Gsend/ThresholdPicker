@@ -15,7 +15,7 @@ class TestMethods(unittest.TestCase):
         labels = np.random.choice([0,1], num_bins)
         percission, thresholds = get_precision_threshold_curve(predicted_probas, labels, num_bins=100)
         self.assertAlmostEqual(percission.mean(), .5, delta=.05)
-        self.assertEquals(len(num_bins), len(thresholds))
+        self.assertEqual(num_bins, thresholds.shape[0])
 
 if __name__ == '__main__':
     unittest.main()
