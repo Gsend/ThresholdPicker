@@ -42,10 +42,10 @@ class PrecisionRecallThresholdCurve():
 
         if mode == 'fscore':
             percisions, recalls, thresholds = self.get_curves(probas, labels)
-            fscores = self.calc_fscore(precisions, recalls, betta)
+            fscores = self.calc_fscore(percisions, recalls, betta)
             min_index = np.argmin(fscores - target)
             return thresholds[min_index], fscores[min_index]
 
     @staticmethod
-    def calc_fscore(precisions, recalls, betta):
-        return (1 + betta**2)*(precisions*recalls)/(betta**2*precisions + recalls)
+    def calc_fscore(percisions, recalls, betta):
+        return (1 + betta**2) * (percisions * recalls) / (betta ** 2 * percisions + recalls)
