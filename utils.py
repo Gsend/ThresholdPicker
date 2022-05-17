@@ -12,7 +12,6 @@ def get_recall_threshold_curve(pos_proba_array, num_bins=100):
     true_pos = num_true - hist_cumsum
     return true_pos/num_true, bins
 
-
 def get_precision_threshold_curve(predicted_probas, labels, num_bins=100, epsilon=1e-10):
     probas_and_labels = pd.DataFrame({'probas': predicted_probas, 'labels': labels})
     true_probas = probas_and_labels['probas'][probas_and_labels['labels'] == 1]
@@ -23,7 +22,7 @@ def get_precision_threshold_curve(predicted_probas, labels, num_bins=100, epsilo
     false_hist_cumsum, bins = get_hist_cumsum(false_probas, num_bins)
     true_pos = num_true - true_hist_cumsum
     false_pos = num_false - false_hist_cumsum
-    precission = true_pos/(true_pos + false_pos + epsilon)
+    precission = (true_pos + epsilon)/(true_pos + false_pos + epsilon)
     return precission, bins
 
 
