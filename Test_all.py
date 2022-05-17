@@ -58,15 +58,19 @@ class TestMethods(unittest.TestCase):
         num_bins = 100
         predicted_probas = np.arange(0, 1 ,.01)
         labels = np.random.choice([0,1], num_bins)
-        true_pos_value=1
-        false_pos_cost=0
         prtc = PRTC()
         threshold, return_signal = prtc.gen_optimal_return_threshold(predicted_probas,
                                                                      labels,
-                                                                     true_pos_value,
-                                                                     false_pos_cost
+                                                                     true_pos_value=1,
+                                                                     false_pos_cost=0
                                                                      )
-        self.assertAlmostEqual(0, 0, delta=.01)
+        self.assertAlmostEqual(threshold, 0, delta=.05)
+        threshold, return_signal = prtc.gen_optimal_return_threshold(predicted_probas,
+                                                                     labels,
+                                                                     true_pos_value=0,
+                                                                     false_pos_cost=1
+                                                                     )
+        self.assertAlmostEqual(threshold, 1, delta=.05)
 
 
 if __name__ == '__main__':
