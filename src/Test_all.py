@@ -1,7 +1,7 @@
 import unittest
-from utils import *
+from src.utils import *
 np.random.seed(0)
-from ThresholdPicker import ThresholdPicker as PRTC
+from src.ThresholdPicker import ThresholdPicker as PRTC
 
 
 class TestMethods(unittest.TestCase):

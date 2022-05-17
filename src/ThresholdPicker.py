@@ -1,6 +1,6 @@
-from utils import get_recall_threshold_curve, get_precision_threshold_curve
+from src.utils import get_recall_threshold_curve, get_precision_threshold_curve
 import numpy as np
-import matplotlib.pyplot as plt
+
 
 class ThresholdPicker():
 
