@@ -1,6 +1,6 @@
 from utils import get_recall_threshold_curve, get_precision_threshold_curve
 import numpy as np
-
+import matplotlib.pyplot as plt
 
 class ThresholdPicker():
 
@@ -41,7 +41,7 @@ class ThresholdPicker():
             return thresholds[min_index], percisions[min_index]
 
         if mode == 'fscore':
-            percisions, recalls, thresholds = self.get_curves(probas, labels)
+            recalls, percisions, thresholds = self.get_curves(probas, labels)
             fscores = self.calc_fscore(percisions, recalls, betta)
             diffs = np.abs(fscores - target)
             min_index = np.argmin(diffs)
@@ -70,9 +70,10 @@ class ThresholdPicker():
     def gen_optimal_return_threshold(self, probas, labels,
                                  true_pos_value, false_pos_cost):
         true_rate = labels.mean()
-        percisions, recalls, thresholds = self.get_curves(probas, labels)
+        recalls, percisions, thresholds = self.get_curves(probas, labels)
         return_threhold_sig = self.gen_mean_return_signal(percisions, recalls,
-                                                     true_pos_value,
-                                                     false_pos_cost)
+                                                          true_rate,
+                                                          true_pos_value,
+                                                          false_pos_cost)
         best_threshold_index = np.argmax(return_threhold_sig)
         return thresholds[best_threshold_index], return_threhold_sig
