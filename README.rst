@@ -6,7 +6,7 @@ cost of false predictions are unequal.
 
 This project provide several tools to help dealing with the threshold picking problems:
 1. analyze percision and recall vs threshold
-2. evaluate fscore vs threhsold
+2. evaluate fscore vs threshold
 3. pick best threshold for a given fscore
 4. pick best threshold for a given case based on:
     -true vs false samples distribution
