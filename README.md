@@ -12,9 +12,10 @@ The tool currently supports the following scenarios:
    set and receive the threshold that would give the score 
    closest to the the one you specified.
    
-2. In case you need to optimize the return on investment(ROI) 
-of your model. with a given value for each True-Positive and 
-a cost for each False-Positive. 
+2. In case you need to balance the True-Positive and
+False-Positive rates for optimal performance for a given 
+data disterbution.
+The Threshold  
 This module can be run to return the threshold returns the 
 maximal ROI on your validation set. 
 Thus allowing you to fine tune your model for maximal ROI.
