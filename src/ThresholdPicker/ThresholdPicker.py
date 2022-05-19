@@ -71,13 +71,12 @@ class ThresholdPicker():
         thresholds = all_signals['thresholds']
         return tp*tp_value + fp*fp_value + tn*tn_value + fn*fn_value, thresholds
 
-    def gen_optimal_return_threshold(self, probas, labels,
-                                 true_pos_value, false_pos_cost):
+    def gen_optimal_return_threshold(self, probas, labels, tp_value,
+                                     fp_value, tn_value, fn_value):
         true_rate = labels.mean()
         recall_sig, percision_sig, thresholds = self.get_curves(probas, labels)
-        return_vs_threhold_sig = self.gen_mean_return_signal(percision_sig, recall_sig,
-                                                          true_rate,
-                                                          true_pos_value,
-                                                          false_pos_cost)
-        best_threshold_index = np.argmax(return_vs_threhold_sig)
-        return thresholds[best_threshold_index], return_vs_threhold_sig
+        return_signal, thresholds = self.gen_value_signal(probas, labels, tp_value,
+                                                       fp_value, tn_value, fn_value)
+
+        best_threshold_index = np.argmax(return_signal)
+        return thresholds[best_threshold_index], return_signal
