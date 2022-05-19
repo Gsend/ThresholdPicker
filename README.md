@@ -1,7 +1,7 @@
 # ThresholdPicker
 ## A Tool for Optimizing Model Threshold.
 Model Threshold is for most models set to a default of 0.5.
-In many cases your model performance can be imporved by selecting another threshold.
+In many cases your model performance can be improved by selecting another threshold.
 The Purpose of this project is to provide a tool for optimal Threshold picking.<br>
 *This tool is designed to work only with Binary Classifiers*.<br>
 
@@ -57,7 +57,7 @@ return the maximal average income.
    set and receive the threshold that would give the recall 
    closest to the the one you specified. Usage Example:
    
-    betta=1 # can peak any betta 
+    beta=1 # can peak any beta 
     threshold, _ = get_threshold(predicted_probas,
                                  labels, target=target,
                                  mode='fscore', beta=beta)
