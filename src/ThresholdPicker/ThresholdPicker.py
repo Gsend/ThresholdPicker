@@ -5,9 +5,9 @@ import numpy as np
 
 class ThresholdPicker():
 
-    def __init__(self, num_bins=1000, betta=2):
+    def __init__(self, num_bins=1000, beta=2):
         self.num_bins = num_bins
-        self.betta = betta
+        self.beta = beta
         self.values = None
 
 
@@ -18,7 +18,7 @@ class ThresholdPicker():
                                                              num_bins=self.num_bins)
         return recall_rate, precision_rate, bins
 
-    def get_threshold(self, probas, labels, target, mode='recall', betta=1):
+    def get_threshold(self, probas, labels, target, mode='recall', beta=1):
         """
         calculate the threshold that would return the closest valuse to
         the desired recall/percision.
@@ -43,23 +43,16 @@ class ThresholdPicker():
 
         if mode == 'fscore':
             recall_sig, percision_sig, thresholds = self.get_curves(probas, labels)
-            fscores = self.calc_fscore(percision_sig, recall_sig, betta)
+            fscores = self.calc_fscore(percision_sig, recall_sig, beta)
             diffs = np.abs(fscores - target)
             min_index = np.argmin(diffs)
             return thresholds[min_index], fscores[min_index], fscores
 
 
     @staticmethod
-    def calc_fscore(percision_sig, recall_sig, betta):
-        return (1 + betta**2) * (percision_sig * recall_sig) / (betta ** 2 * percision_sig + recall_sig)
-
-    # @staticmethod
-    # def gen_true_pos_signal(recall_sig, positive_rate):
-    #     return recall_sig*positive_rate
-    #
-    # @staticmethod
-    # def gen_false_pos_signal(recall_sig, percision_sig, true_rate):
-    #     return (percision_sig**-1 - 1) * recall_sig * true_rate
+    def calc_fscore(percision_sig, recall_sig, beta):
+        return (1 + beta**2) * (percision_sig * recall_sig) \
+               / (beta ** 2 * percision_sig + recall_sig)
 
     def gen_value_signal(self, probas, labels,
                                tp_value, fp_value, tn_value, fn_value):

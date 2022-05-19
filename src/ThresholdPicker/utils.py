@@ -32,7 +32,7 @@ def get_precision_threshold_curve(predicted_probas, labels, num_bins=100, epsilo
     true_pos = rates['TP']
     false_pos = rates['FP']
     precission = (true_pos + epsilon)/(true_pos + false_pos + epsilon)
-    return precission, rates['threshold_bins']
+    return precission, rates['thresholds']
 
 
 if __name__ == '__main__':

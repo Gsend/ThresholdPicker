@@ -11,12 +11,13 @@ class TestMethods(unittest.TestCase):
         recall, thresholds = get_recall_threshold_curve(positive_probas, num_bins=4)
         self.assertListEqual(list(recall), [.8, .6, .4])
 
-    def test_precission_curve(self):
+    def test_precision_curve(self):
         num_bins = 100
         predicted_probas = np.arange(0, 1 ,.01)
         labels = np.random.choice([0,1], num_bins)
-        percission, thresholds = get_precision_threshold_curve(predicted_probas, labels, num_bins=100)
-        self.assertAlmostEqual(percission.mean(), .5, delta=.1)
+        percision, thresholds = get_precision_threshold_curve(predicted_probas, labels,
+                                                               num_bins=100)
+        self.assertAlmostEqual(percision.mean(), .5, delta=.1)
         self.assertEqual(num_bins, thresholds.shape[0])
 
     def test_recall_threshold(self):
@@ -50,7 +51,7 @@ class TestMethods(unittest.TestCase):
         prtc = PRTC()
         threshold, result_fscore, _ = prtc.get_threshold(predicted_probas,
                                                          labels, target=target,
-                                                         mode='fscore', betta=1)
+                                                         mode='fscore', beta=1)
         self.assertAlmostEqual(result_fscore, target, delta=.01)
 
 
@@ -61,14 +62,18 @@ class TestMethods(unittest.TestCase):
         prtc = PRTC()
         threshold, return_signal = prtc.gen_optimal_return_threshold(predicted_probas,
                                                                      labels,
-                                                                     true_pos_value=1,
-                                                                     false_pos_cost=0
+                                                                     tp_value=1,
+                                                                     fp_value=0,
+                                                                     tn_value=0,
+                                                                     fn_value=0
                                                                      )
         self.assertAlmostEqual(threshold, 0, delta=.05)
         threshold, return_signal = prtc.gen_optimal_return_threshold(predicted_probas,
                                                                      labels,
-                                                                     true_pos_value=0,
-                                                                     false_pos_cost=1
+                                                                     tp_value=0,
+                                                                     fp_value=-1,
+                                                                     tn_value=0,
+                                                                     fn_value=0
                                                                      )
         self.assertAlmostEqual(threshold, 1, delta=.05)
 
